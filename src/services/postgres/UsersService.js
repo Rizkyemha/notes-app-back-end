@@ -7,9 +7,6 @@ const NotFoundError = require("../../api/notes/exceptions/NotFoundError");
 class UserService {
 	constructor() {
 		this._pool = new Pool();
-
-		this.addUser = this.addUser.bind(this);
-		this.getUserById = this.getUserById(this);
 	}
 
 	async verifyNewUsername(username) {
@@ -30,12 +27,12 @@ class UserService {
 	async addUser({ username, password, fullname }) {
 		await this.verifyNewUsername(username);
 
-		const id = nanoid(16);
+		const id = await nanoid(16);
 		const hashedPassword = await bcrypt.hash(password, 10);
 
 		const query = {
 			text: "INSERT INTO users (id, username, password, fullname) VALUES ($1, $2, $3, $4) RETURNING id",
-			value: [id, username, hashedPassword, fullname],
+			values: [id, username, hashedPassword, fullname],
 		};
 
 		const result = await this._pool.query(query);
