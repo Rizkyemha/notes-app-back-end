@@ -1,5 +1,5 @@
 class AuthenticationsHandler {
-	construktor(authenticationsService, usersService, tokenManager, validator) {
+	constructor(authenticationsService, usersService, tokenManager, validator) {
 		this._authenticationsService = authenticationsService;
 		this._usersService = usersService;
 		this._tokenManager = tokenManager;
@@ -13,7 +13,10 @@ class AuthenticationsHandler {
 	}
 
 	async postAuthenticationHandler(request, h) {
-		this._validator.validatePostAuthenticationPayload(request.payload);
+		// validator belum jalan
+		this._validator.validatePostAuthenticationsPayload(request.payload);
+
+		console.log("handler jalan");
 
 		const { username, password } = request.payload;
 		const id = await this._usersService.verifyUserCredential(
@@ -40,7 +43,7 @@ class AuthenticationsHandler {
 	}
 
 	async putAuthenticationHandler(request) {
-		this._validator.validatePutAuthenticationPayload(request.payload);
+		this._validator.validatePutAuthenticationsPayload(request.payload);
 
 		const { refreshToken } = request.payload;
 		await this._authenticationsService.verifyRefreshToken(refreshToken);
@@ -57,7 +60,7 @@ class AuthenticationsHandler {
 	}
 
 	async deleteAuthenticationHandler(request) {
-		this._validator.validateDeleteAuthenticationPayload(request.payload);
+		this._validator.validateDeleteAuthenticationsPayload(request.payload);
 
 		const { refreshToken } = request.payload;
 		await this._authenticationsService.verifyRefreshToken(refreshToken);

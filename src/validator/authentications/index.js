@@ -7,6 +7,7 @@ const {
 
 const AuthenticationsValidator = {
 	validatePostAuthenticationsPayload: (payload) => {
+		console.log("Validator jalan");
 		const validationResult =
 			PostAuthenticationsPayloadSchema.validate(payload);
 		if (validationResult.error) {
