@@ -17,6 +17,7 @@
 		"object-curly-spacing": "off",
 		"eslint-plugin-import/no-extraneous-dependencies": "off",
 		"comma-dangle": "off",
-		"import/no-extraneous-dependencies": "off"
+		"import/no-extraneous-dependencies": "off",
+		"operator-linebreak": "off"
 	}
 }
