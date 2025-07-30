@@ -13,10 +13,7 @@ class AuthenticationsHandler {
 	}
 
 	async postAuthenticationHandler(request, h) {
-		// validator belum jalan
 		this._validator.validatePostAuthenticationsPayload(request.payload);
-
-		console.log("handler jalan");
 
 		const { username, password } = request.payload;
 		const id = await this._usersService.verifyUserCredential(
@@ -31,7 +28,7 @@ class AuthenticationsHandler {
 
 		const response = h.response({
 			status: "success",
-			message: "Autentikasi berhasil ditambahkan",
+			message: "Authentication berhasil ditambahkan",
 			data: {
 				accessToken,
 				refreshToken,
@@ -52,7 +49,7 @@ class AuthenticationsHandler {
 
 		return {
 			status: "success",
-			message: "Autentikasi berhasil diperbarui",
+			message: "Access Token berhasil diperbarui",
 			data: {
 				accessToken,
 			},
@@ -68,7 +65,7 @@ class AuthenticationsHandler {
 
 		return {
 			status: "success",
-			message: "Autentikasi berhasil dihapus",
+			message: "Refresh token berhasil dihapus",
 		};
 	}
 }
